@@ -1,0 +1,88 @@
+﻿@page
+@model MediaBrowser.Pages.Movies.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Movie.Title;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Html.DisplayFor(model => model.Movie.Title)</h1>
+
+<div>
+    <hr />
+    <img src="@Model.Movie.PosterUrl" width="400"/>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Tagline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Tagline)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.MpaaRating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.MpaaRating)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.PopularityScore)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.PopularityScore)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.ReleaseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Genre)
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-page="/Genres/Details" asp-route-id="@Model.Movie.Genre.GenreId">@Html.DisplayFor(model => model.Movie.Genre.Genre1)</a>
+        </dd>
+        <dt class="col-sm-2">
+            Director(s)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var director in Model.Movie.Directors)
+            {
+                <div><a asp-page="/Directors/Details" asp-route-id="@director.DirectorId">@director.Director1</a></div>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Cast
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var actor in Model.Movie.Actors)
+            {
+                <div><a asp-page="/Actors/Details" asp-route-id="@actor.ActorId">@actor.Actor1</a></div>
+            }
+        </dd>
+    </dl>
+</div>
+<div class="row">
+  <div class="col-12">
+        <h2>Critic Reviews</h2>
+</div>
+    @foreach (var review in Model.Movie.Criticreviews)
+    {
+        <div class="col-4 text-center ">
+            <span class="display-1 align-middle">@review.CriticScore</span>
+        </div>
+        <div class="col-8">
+            @review.CriticReview1
+        </div>
+    }
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

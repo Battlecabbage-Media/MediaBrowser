@@ -1,0 +1,63 @@
+﻿@page
+@model MediaBrowser.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].PosterUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Tagline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].MpaaRating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Movie) {
+        <tr>
+            <td>
+                <img src="@item.PosterUrl" width="200" />
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.MovieId">@Html.DisplayFor(modelItem => item.Title)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tagline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MpaaRating)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Movie.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Movie.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Movie.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Movie.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

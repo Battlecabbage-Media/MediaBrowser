@@ -1,0 +1,114 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Battle Cabbage Media</h1>
+    </div>
+</div>
+<div class="px-4 pt-5 my-5 text-center border-bottom row">
+    <div class="col-lg-6">
+        <h1 class="display-5 text-body-emphasis">Featured Movie</h1>
+        <a asp-page="/Movies/Details" asp-route-id="@Model.FrontPageSummary.RandomMovie.MovieId"><h1 class="display-6 fw-bold text-body-emphasis">@Model.FrontPageSummary.RandomMovie.Title</h1></a>
+        <p class="lead mb-4">@Model.FrontPageSummary.RandomMovie.Description</p>
+    </div>
+    <div class="col-lg-6">
+        <div class="container px-5">
+            <img src="@Model.FrontPageSummary.RandomMovie.PosterUrl" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="500" loading="lazy">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <h3>Top 5 Rated Movies</h3>
+        <div class="list-group m-3">
+            @foreach (var movie in Model.FrontPageSummary.TopRatedMovies)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@movie.Movie.MovieId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <img src="@movie.Movie.PosterUrl" alt="AI Generated Movie Poster" width="32" height="32" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@movie.Movie.Title</h6>
+                        <p class="mb-0 opacity-75">Rating: @movie.Rating</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>5 Worst Rated Movies</h3>
+        <div class="list-group m-3">
+            @foreach (var movie in Model.FrontPageSummary.WorstRatedMovies)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@movie.Movie.MovieId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <img src="@movie.Movie.PosterUrl" alt="AI Generated Movie Poster" width="32" height="32" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@movie.Movie.Title</h6>
+                        <p class="mb-0 opacity-75">Rating: @movie.Rating</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>5 Most Recent Movies</h3>
+        <div class="list-group m-3">
+            @foreach (var movie in Model.FrontPageSummary.MostRecentMovies)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@movie.MovieId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <img src="@movie.PosterUrl" alt="AI Generated Movie Poster" width="32" height="32" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@movie.Title</h6>
+                        <p class="mb-0 opacity-75">Released: @movie.ReleaseDate</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>Top 5 Genres</h3>
+        <div class="list-group m-3">
+            @foreach (var genre in Model.FrontPageSummary.PopularGenres)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@genre.Genre.GenreId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@genre.Genre.Genre1</h6>
+                        <p class="mb-0 opacity-75">Movies in Genre: @genre.MovieCount</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>Top 5 Actors</h3>
+        <div class="list-group m-3">
+            @foreach (var Actor in Model.FrontPageSummary.PopularActors)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@Actor.Actor.ActorId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@Actor.Actor.Actor1</h6>
+                        <p class="mb-0 opacity-75">Movies Starred In: @Actor.MovieCount</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h3>Top 5 Directors</h3>
+        <div class="list-group m-3">
+            @foreach (var Director in Model.FrontPageSummary.PopularDirectors)
+            {
+                <a asp-page="/Movies/Details" asp-route-id="@Director.Director.DirectorId" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <h6 class="mb-0">@Director.Director.Director1</h6>
+                        <p class="mb-0 opacity-75">Movies Directed: @Director.MovieCount</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+
