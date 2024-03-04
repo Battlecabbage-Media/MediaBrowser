@@ -1,0 +1,25 @@
+﻿@page
+@model MediaBrowser.Pages.Genres.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Genre.Genre1;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Html.DisplayFor(model => model.Genre.Genre1)</h1>
+
+<div>
+    <h4>Genre</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Movies
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var movie in Model.Genre.Movies)
+            {
+                <div><a asp-page="/Movies/Details" asp-route-id="@movie.MovieId">@movie.Title</a></div>
+            }
+        </dd>
+    </dl>
+</div>

@@ -1,0 +1,32 @@
+﻿@page
+@model MediaBrowser.Pages.Actors.IndexModel
+
+@{
+    ViewData["Title"] = "Actors";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Actors</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Actor Name
+            </th>
+            <th>Number of Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Actor) {
+        <tr>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Actor.ActorId">@Html.DisplayFor(modelItem => item.Actor.Actor1)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieCount)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

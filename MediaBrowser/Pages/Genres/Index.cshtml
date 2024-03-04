@@ -1,0 +1,34 @@
+﻿@page
+@model MediaBrowser.Pages.Genres.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Genres</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Genre
+            </th>
+            <th>
+                Movies with Genre
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Genre) {
+        <tr>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Genre.GenreId">@Html.DisplayFor(modelItem => item.Genre.Genre1)</a>
+            </td>
+            <td>
+                @item.MovieCount
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
