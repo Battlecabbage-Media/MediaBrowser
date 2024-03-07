@@ -1,10 +1,13 @@
 using MediaBrowser.Models;
 using Microsoft.EntityFrameworkCore;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddOpenTelemetry().UseAzureMonitor();
 
 builder.Services.AddDbContext<BattleCabbageVideoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BattleCabbageVideoContext")));
