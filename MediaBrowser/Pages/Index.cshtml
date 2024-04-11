@@ -9,16 +9,60 @@
         <h1 class="display-4">Welcome to Battle Cabbage Media</h1>
     </div>
 </div>
-<div class="px-4 pt-5 my-5 text-center border-bottom row">
-    <div class="col-lg-6">
-        <h1 class="display-5 text-body-emphasis">Featured Movie</h1>
-        <a asp-page="/Movies/Details" asp-route-id="@Model.FrontPageSummary.RandomMovie.MovieId"><h1 class="display-6 fw-bold text-body-emphasis">@Model.FrontPageSummary.RandomMovie.Title</h1></a>
-        <p class="lead mb-4">@Model.FrontPageSummary.RandomMovie.Description</p>
-    </div>
-    <div class="col-lg-6">
-        <div class="container px-5">
-            <img src="@Model.FrontPageSummary.RandomMovie.PosterUrl" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="500" loading="lazy">
+<div class="px-4 my-3 text-center border-bottom row">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-theme="dark">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="@Model.FrontPageSummary.RandomMovies.First().Title"></button>
+            @{
+                int i = 1;
+            }
+            @foreach (var movie in Model.FrontPageSummary.RandomMovies.Skip(1))
+            {
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="@i" aria-label="@movie.Title"></button>
+                i++;
+            }
         </div>
+        <div class="carousel-inner" data-bs-theme="light">
+            <div class="carousel-item active">
+                <div class="px-4 text-center row">
+                    <div class="col-lg-8 px-5">
+                        <h1 class="display-5 text-body-emphasis ">Featured Movie</h1>
+                        <a asp-page="/Movies/Details" asp-route-id="@Model.FrontPageSummary.RandomMovies.First().MovieId"><h1 class="display-6 fw-bold text-body-emphasis">@Model.FrontPageSummary.RandomMovies.First().Title</h1></a>
+                        <p class="lead mb-4 mx-4">@Model.FrontPageSummary.RandomMovies.First().Description</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="container px-5">
+                            <img src="@Model.FrontPageSummary.RandomMovies.First().PosterUrl" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="500" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @foreach (var movie in Model.FrontPageSummary.RandomMovies.Skip(1))
+            {
+                <div class="carousel-item">
+                    <div class="px-4 text-center row">
+                        <div class="col-lg-8 px-5">
+                            <h1 class="display-5 text-body-emphasis">Featured Movie</h1>
+                            <a asp-page="/Movies/Details" asp-route-id="@movie.MovieId"><h1 class="display-6 fw-bold text-body-emphasis">@movie.Title</h1></a>
+                            <p class="lead mb-4 mx-4">@movie.Description</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="container px-5">
+                                <img src="@movie.PosterUrl" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="500" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </div>
 <div class="row">
