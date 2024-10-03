@@ -3,6 +3,6 @@
     public class MovieWithRating
     {
         public Movie Movie { get; set; } = null!;
-        public double? Rating { get; set; }
+        public decimal? Rating { get; set; }
     }
 }

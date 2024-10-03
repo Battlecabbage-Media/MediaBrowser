@@ -1,6 +1,8 @@
 using MediaBrowser.Models;
 using Microsoft.EntityFrameworkCore;
 using Azure.Monitor.OpenTelemetry.AspNetCore;
+using Microsoft.Extensions.Azure;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,13 @@ builder.Services.AddOpenTelemetry().UseAzureMonitor();
 
 builder.Services.AddDbContext<BattleCabbageVideoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BattleCabbageVideoContext")));
+
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    // Register clients for each service
+    clientBuilder.AddBlobServiceClient(new Uri("https://battlecabbagemedia.blob.core.windows.net/"));
+    clientBuilder.UseCredential(new DefaultAzureCredential());
+});
 
 var app = builder.Build();
 
@@ -28,6 +37,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapControllers();
 
 app.MapRazorPages();
 

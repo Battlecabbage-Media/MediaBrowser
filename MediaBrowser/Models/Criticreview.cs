@@ -9,7 +9,7 @@ public partial class Criticreview
 
     public int MovieId { get; set; }
 
-    public double CriticScore { get; set; }
+    public decimal CriticScore { get; set; }
 
     public string CriticReview1 { get; set; } = null!;
 
