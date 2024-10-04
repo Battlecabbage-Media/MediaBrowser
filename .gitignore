@@ -362,4 +362,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /MediaBrowser/appsettings.Development.json
-/MediaBrowser/appsettings.Development.json
